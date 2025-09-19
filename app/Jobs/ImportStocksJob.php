@@ -24,10 +24,10 @@ class ImportStocksJob implements ShouldQueue
         $dateFrom = new DateTime('today');
 
         $loadDataService->loadAllData(
-            'stocks', ['dateFrom' => $dateFrom], function (array $items)
+            'stocks', ['dateFrom' => $dateFrom->format('Y-m-d')], function (array $items)
         {
             foreach ($items as $item) {
-                Stock::updateOrCreate(
+                Stock::create(
                     $item,
                 );
             }

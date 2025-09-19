@@ -28,7 +28,7 @@ class ImportSalesJob implements ShouldQueue
             'sales', ['dateFrom' => $dateFrom, 'dateTo' => $dateTo->format('Y-m-d')], function (array $items)
         {
             foreach ($items as $item) {
-                Sale::updateOrCreate(
+                Sale::create(
                     $item,
                 );
             }

@@ -28,7 +28,7 @@ class ImportIncomesJob implements ShouldQueue
             'incomes', ['dateFrom' => $dateFrom, 'dateTo' => $dateTo->format('Y-m-d')], function (array $items)
         {
             foreach ($items as $item) {
-                Income::updateOrCreate(
+                Income::create(
                     $item,
                 );
             }

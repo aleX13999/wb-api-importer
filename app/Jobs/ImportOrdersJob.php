@@ -28,7 +28,7 @@ class ImportOrdersJob implements ShouldQueue
             'orders', ['dateFrom' => $dateFrom, 'dateTo' => $dateTo->format('Y-m-d')], function (array $items)
         {
             foreach ($items as $item) {
-                Order::updateOrCreate(
+                Order::create(
                     $item,
                 );
             }

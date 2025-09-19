@@ -15,7 +15,7 @@ class GuzzleApiService
         $this->apiKey = env('WB_API_KEY');
         $this->client = new Client(
             [
-                'base_uri' => sprintf('https://%s:%s/api/', env('WB_API_HOST'), env('WB_API_PORT')),
+                'base_uri' => sprintf('http://%s:%s/api/', env('WB_API_HOST'), env('WB_API_PORT')),
                 'curl' => [
                     CURLOPT_SSLVERSION => CURL_SSLVERSION_TLSv1_2, // форсируем TLS 1.2
                 ],
@@ -34,7 +34,9 @@ class GuzzleApiService
             $response = $this->client->request('GET', $endpoint, ['query' => $query]);
 
             if ($response->getStatusCode() === 200) {
-                return json_decode($response->getBody(), true);
+                $contents = $response->getBody()->getContents();
+                $responseArray = json_decode($contents, true);
+                return $responseArray['data'] ?? [];
             }
 
             return [];

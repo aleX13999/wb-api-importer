@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('g_number');
             $table->date('date');
-            $table->date('last_change_date');
+            $table->date('last_change_date')->nullable();
             $table->string('supplier_article');
             $table->string('tech_size');
             $table->string('barcode');
@@ -33,8 +33,8 @@ return new class extends Migration
             $table->string('odid')->nullable();
             $table->unsignedTinyInteger('spp');
             $table->float('for_pay');
-            $table->unsignedInteger('finished_price');
-            $table->unsignedInteger('price_with_disc');
+            $table->Integer('finished_price');
+            $table->Integer('price_with_disc');
             $table->string('nm_id');
             $table->string('subject');
             $table->string('category');
@@ -47,7 +47,7 @@ return new class extends Migration
             $table->id();
             $table->string('g_number');
             $table->date('date');
-            $table->date('last_change_date');
+            $table->date('last_change_date')->nullable();
             $table->string('supplier_article');
             $table->string('tech_size');
             $table->string('barcode');
@@ -69,24 +69,24 @@ return new class extends Migration
         Schema::create('stocks', function (Blueprint $table) {
             $table->id();
             $table->date('date');
-            $table->date('last_change_date');
-            $table->string('supplier_article');
-            $table->string('tech_size');
+            $table->date('last_change_date')->nullable();
+            $table->string('supplier_article')->nullable();
+            $table->string('tech_size')->nullable();
             $table->string('barcode');
             $table->integer('quantity');
-            $table->boolean('is_supply');
-            $table->boolean('is_realization');
-            $table->unsignedTinyInteger('quantity_full');
+            $table->boolean('is_supply')->nullable();
+            $table->boolean('is_realization')->nullable();
+            $table->integer('quantity_full')->nullable();
             $table->string('warehouse_name');
-            $table->unsignedTinyInteger('in_way_to_client');
-            $table->unsignedTinyInteger('in_way_from_client');
-            $table->string('nm_id');
-            $table->string('subject');
-            $table->string('category');
-            $table->string('brand');
-            $table->string('sc_code');
-            $table->integer('price');
-            $table->integer('discount');
+            $table->tinyInteger('in_way_to_client')->nullable();
+            $table->tinyInteger('in_way_from_client')->nullable();
+            $table->string('nm_id')->nullable();
+            $table->string('subject')->nullable();
+            $table->string('category')->nullable();
+            $table->string('brand')->nullable();
+            $table->string('sc_code')->nullable();
+            $table->integer('price')->nullable();
+            $table->integer('discount')->nullable();
             $table->timestamps();
         });
 
@@ -95,7 +95,7 @@ return new class extends Migration
             $table->integer('income_id');
             $table->string('number');
             $table->date('date');
-            $table->date('last_change_date');
+            $table->date('last_change_date')->nullable();
             $table->string('supplier_article');
             $table->string('tech_size');
             $table->string('barcode');
