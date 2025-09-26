@@ -1,0 +1,39 @@
+networks:
+  wb-api_internal_network:
+    name: wb-api_internal_network
+    ipam:
+      config:
+        # доступные адреса 172.29.0.1 - 172.29.0.14
+        - subnet: 172.29.0.0/28
+
+services:
+  wb-api-php-fpm:
+    container_name: wb-api-php-fpm
+    build: docker/php
+    volumes:
+      - ./:/var/www
+    environment:
+      - PHP_OPCACHE_VALIDATE_TIMESTAMPS=1
+      - PHP_OPCACHE_REVALIDATE_FREQ=0
+    networks:
+      wb-api_internal_network:
+        ipv4_address: 172.29.0.2
+
+  wb-api-mysql:
+    image: mysql:8.0
+    container_name: wb-api-mysql
+    cap_add:
+      - SYS_NICE
+    volumes:
+      - ./:/var/www
+      - ./var/data/mysql:/var/lib/mysql
+      - ./var/logs/mysql:/var/log/mysql
+      - ./docker/mysql/initdb.d:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    ports:
+      - "${MYSQL_HOST}:${MYSQL_PORT}:3306"
+    networks:
+      wb-api_internal_network:
+        ipv4_address: 172.29.0.4
