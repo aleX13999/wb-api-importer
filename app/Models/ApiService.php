@@ -10,4 +10,9 @@ class ApiService extends Model
         'name',
         'base_url',
     ];
+
+    public function tokens(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Token::class);
+    }
 }

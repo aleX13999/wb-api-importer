@@ -15,4 +15,9 @@ class Account extends Model
     {
         return $this->belongsTo(Company::class);
     }
+
+    public function tokens(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Token::class);
+    }
 }
