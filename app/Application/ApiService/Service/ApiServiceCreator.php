@@ -22,7 +22,8 @@ readonly class ApiServiceCreator
 
         return ApiService::create(
             [
-                'name' => $data->getName(),
+                'name'     => $data->getName(),
+                'base_url' => $data->getBaseUrl(),
             ],
         );
     }

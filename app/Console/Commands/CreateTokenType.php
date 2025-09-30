@@ -14,7 +14,7 @@ class CreateTokenType extends Command
      *
      * @var string
      */
-    protected $signature = 'app:create-token-type {name: The name of the token type}';
+    protected $signature = 'app:create-token-type {name : The name of the token type}';
 
     /**
      * The console command description.

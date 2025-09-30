@@ -14,7 +14,7 @@ class CreateApiService extends Command
      *
      * @var string
      */
-    protected $signature = 'app:create-api-service {name: The name of the API service} {base_url: The URL of the API service}';
+    protected $signature = 'app:create-api-service {name : The name of the API service} {base_url : The URL of the API service}';
 
     /**
      * The console command description.

@@ -14,7 +14,7 @@ class CreateAccount extends Command
      *
      * @var string
      */
-    protected $signature = 'app:create-account {companyId: Id of the company} {name: The name of the account}';
+    protected $signature = 'app:create-account {companyId : Id of the company} {name : The name of the account}';
 
     /**
      * The console command description.

@@ -10,4 +10,5 @@ interface AccountRepositoryInterface
     public function getOne(int $id): ?Account;
     public function getOneByName(string $name): ?Account;
     public function getAll(): Collection;
+    public function getByIds(array $ids): Collection;
 }

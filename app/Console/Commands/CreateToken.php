@@ -15,10 +15,11 @@ class CreateToken extends Command
      * @var string
      */
     protected $signature = 'app:create-token
-    {apiServiceId: Id of the API service}
-    {tokenTypeId: Id of the token type}
-    {accountId: Id of the account}
-    {token: The name of the token}';
+    {apiServiceId : Id of the API service}
+    {tokenTypeId : Id of the token type}
+    {accountId : Id of the account}
+    {token : The name of the token}
+    {--expires= : The expiration time of the token}';
 
     /**
      * The console command description.
@@ -43,7 +44,8 @@ class CreateToken extends Command
             ->setApiServiceId($this->argument('apiServiceId'))
             ->setTokenTypeId($this->argument('tokenTypeId'))
             ->setAccountId($this->argument('accountId'))
-            ->setToken($this->argument('token'));
+            ->setToken($this->argument('token'))
+            ->setPeriodExpirationAt($this->option('expires'));
 
         try {
             $this->creator->create($createData);

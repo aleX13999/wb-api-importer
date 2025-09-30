@@ -14,7 +14,7 @@ class CreateCompany extends Command
      *
      * @var string
      */
-    protected $signature = 'app:create-company {name: The name of the company}';
+    protected $signature = 'app:create-company {name : The name of the company}';
 
     /**
      * The console command description.

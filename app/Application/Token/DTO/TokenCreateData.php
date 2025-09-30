@@ -6,11 +6,11 @@ use DateTime;
 
 class TokenCreateData
 {
-    private int      $accountId;
-    private int      $apiServiceId;
-    private int      $tokenTypeId;
-    private string   $token;
-    private DateTime $periodExpirationAt;
+    private int       $accountId;
+    private int       $apiServiceId;
+    private int       $tokenTypeId;
+    private string    $token;
+    private ?DateTime $periodExpirationAt = null;
 
     public function getAccountId(): int
     {
@@ -60,12 +60,12 @@ class TokenCreateData
         return $this;
     }
 
-    public function getPeriodExpirationAt(): DateTime
+    public function getPeriodExpirationAt(): ?DateTime
     {
         return $this->periodExpirationAt;
     }
 
-    public function setPeriodExpirationAt(DateTime $periodExpirationAt): static
+    public function setPeriodExpirationAt(?DateTime $periodExpirationAt): static
     {
         $this->periodExpirationAt = $periodExpirationAt;
 

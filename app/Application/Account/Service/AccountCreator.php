@@ -22,8 +22,8 @@ readonly class AccountCreator
 
         return Account::create(
             [
-                'id'   => $data->getCompanyId(),
-                'name' => $data->getName(),
+                'company_id' => $data->getCompanyId(),
+                'name'       => $data->getName(),
             ],
         );
     }
