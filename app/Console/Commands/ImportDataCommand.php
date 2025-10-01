@@ -54,7 +54,7 @@ class ImportDataCommand extends Command
 
                     $this->info(sprintf("API сервис %s(%s)", $account->name, $account->id));
 
-                    $this->apiService->connection($apiService->base_url, $token->token);
+                    $this->apiService->connection($apiService->base_url . '/api/', $token->token);
 
                     $this->loadData(
                         endpoint: 'sales',
