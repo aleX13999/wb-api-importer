@@ -44,15 +44,15 @@ class ImportDataCommand extends Command
 
             /** @var Account $account */
             foreach ($accounts as $account) {
-                $this->info(sprintf("Аккаунт %s(%s)", $account->name, $account->id));
+                $this->info(sprintf("Аккаунт - %s(%s)", $account->name, $account->id));
 
-                $tokens = $account->tokens();
+                $tokens = $account->tokens;
 
                 /** @var Token $token */
                 foreach ($tokens as $token) {
-                    $apiService = $token->apiService();
+                    $apiService = $token->apiService;
 
-                    $this->info(sprintf("API сервис %s(%s)", $account->name, $account->id));
+                    $this->info(sprintf("API сервис - %s(%s)", $apiService->name, $apiService->id));
 
                     $this->apiService->connection($apiService->base_url . '/api/', $token->token);
 
@@ -71,7 +71,7 @@ class ImportDataCommand extends Command
 
                     $this->loadData(
                         endpoint: 'orders',
-                        query:    ['dateFrom' => $dateFrom, 'dateTo' => $dateTo->format('Y-m-d')],
+                        query:    ['dateFrom' => $dateFrom->format('Y-m-d'), 'dateTo' => $dateTo->format('Y-m-d')],
                         saveCallback: function (array $items) use ($account) {
                             foreach ($items as $item) {
                                 $item['account_id'] = $account->id;
@@ -84,7 +84,7 @@ class ImportDataCommand extends Command
 
                     $this->loadData(
                         endpoint: 'stocks',
-                        query:    ['dateFrom' => $dateFrom->format('Y-m-d')],
+                        query:    ['dateFrom' => $dateTo->format('Y-m-d')],
                         saveCallback: function (array $items) use ($account) {
                             foreach ($items as $item) {
                                 $item['account_id'] = $account->id;
@@ -97,7 +97,7 @@ class ImportDataCommand extends Command
 
                     $this->loadData(
                         endpoint: 'incomes',
-                        query:    ['dateFrom' => $dateFrom, 'dateTo' => $dateTo->format('Y-m-d')],
+                        query:    ['dateFrom' => $dateFrom->format('Y-m-d'), 'dateTo' => $dateTo->format('Y-m-d')],
                         saveCallback: function (array $items) use ($account) {
                             foreach ($items as $item) {
                                 $item['account_id'] = $account->id;
@@ -148,6 +148,8 @@ class ImportDataCommand extends Command
                     } else {
                         throw $e;
                     }
+                } catch (Exception $e) {
+                    throw new Exception($endpoint . ' - ' . $e->getMessage());
                 }
             } while (true);
 

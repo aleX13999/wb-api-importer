@@ -8,4 +8,6 @@ Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
 
-Schedule::command('import:data')->twiceDaily();
+Schedule::command('import:data')
+    ->twiceDaily()
+    ->appendOutputTo(storage_path('logs/import_data.log'));
