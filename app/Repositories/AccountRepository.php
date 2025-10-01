@@ -20,11 +20,11 @@ class AccountRepository implements AccountRepositoryInterface
 
     public function getAll(): Collection
     {
-        return Account::all();
+        return Account::query()->with(['token', 'token.api_service'])->get();
     }
 
     public function getByIds(array $ids): Collection
     {
-        return Account::query()->whereIn('id', $ids)->get();
+        return Account::query()->whereIn('id', $ids)->with(['token', 'token.api_service'])->get();
     }
 }
